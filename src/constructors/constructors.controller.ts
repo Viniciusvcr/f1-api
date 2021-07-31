@@ -26,6 +26,11 @@ export class ConstructorsController {
     return this.constructorsService.findAll();
   }
 
+  @Get('active')
+  findActive() {
+    return this.constructorsService.findActive();
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIdPipe) id: number) {
     return this.constructorsService.findOne(id);

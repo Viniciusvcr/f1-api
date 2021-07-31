@@ -20,6 +20,12 @@ export class Constructor {
   @Column({ type: 'integer' })
   foundationYear: number;
 
+  @Column({ type: 'integer' })
+  championshipEntryYear: number;
+
+  @Column({ type: 'integer', nullable: true })
+  championshipLeavingYear: number;
+
   @Column({ nullable: true })
   website: string;
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
 import { UpdateConstructorDto } from './dto/update-constructor.dto';
 import { Constructor } from './entities/constructor.entity';
@@ -45,5 +45,11 @@ export class ConstructorsService {
     }
 
     this.constructorRepository.delete(id);
+  }
+
+  findActive() {
+    return this.constructorRepository.find({
+      where: { championshipLeavingYear: IsNull() },
+    });
   }
 }
