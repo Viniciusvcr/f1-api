@@ -1,12 +1,13 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
+import { ParseIdPipe } from 'src/parse-id.pipe';
 import { ConstructorsService } from './constructors.service';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
 import { UpdateConstructorDto } from './dto/update-constructor.dto';
@@ -26,20 +27,20 @@ export class ConstructorsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id', ParseIdPipe) id: number) {
     return this.constructorsService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: number,
+    @Param('id', ParseIdPipe) id: number,
     @Body() updateConstructorDto: UpdateConstructorDto,
   ) {
     return this.constructorsService.update(id, updateConstructorDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id', ParseIdPipe) id: number) {
     return this.constructorsService.remove(id);
   }
 }

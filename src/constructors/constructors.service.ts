@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
 import { UpdateConstructorDto } from './dto/update-constructor.dto';
 import { Constructor } from './entities/constructor.entity';
+import { ConstructorNotFoundException } from './exceptions/not-found.exception';
 
 @Injectable()
 export class ConstructorsService {
@@ -20,15 +21,29 @@ export class ConstructorsService {
     return this.constructorRepository.find();
   }
 
-  findOne(id: number) {
-    return this.constructorRepository.findOne(id);
+  async findOne(id: number) {
+    const constructor = await this.constructorRepository.findOne(id);
+
+    if (!constructor) {
+      throw new ConstructorNotFoundException();
+    }
+
+    return constructor;
   }
 
-  update(id: number, updateConstructorDto: UpdateConstructorDto) {
+  async update(id: number, updateConstructorDto: UpdateConstructorDto) {
+    if (!(await this.constructorRepository.findOne(id))) {
+      throw new ConstructorNotFoundException();
+    }
+
     return this.constructorRepository.update(id, updateConstructorDto);
   }
 
-  remove(id: number) {
-    return this.constructorRepository.delete(id);
+  async remove(id: number) {
+    if (!(await this.constructorRepository.findOne(id))) {
+      throw new ConstructorNotFoundException();
+    }
+
+    this.constructorRepository.delete(id);
   }
 }
