@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
 import { UpdateConstructorDto } from './dto/update-constructor.dto';
@@ -7,6 +8,7 @@ import { Constructor } from './entities/constructor.entity';
 @Injectable()
 export class ConstructorsService {
   constructor(
+    @InjectRepository(Constructor)
     private readonly constructorRepository: Repository<Constructor>,
   ) {}
 
