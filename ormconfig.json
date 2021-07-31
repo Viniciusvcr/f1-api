@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "f1-api",
+  "password": "f1-api123",
+  "database": "f1-api",
+  "entities": ["dist/**/*.entity.ts"],
+  "autoLoadEntities": true,
+  "synchronize": true
+}

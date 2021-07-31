@@ -1,0 +1,11 @@
+version: '3'
+services:
+  mono-db:
+    container_name: postgres-f1-api
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=f1-api123
+      - POSTGRES_USER=f1-api
+      - POSTGRES_DB=f1-api
