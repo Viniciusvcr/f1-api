@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
+import { QueryConstructorDto } from './dto/query-constructor.dto';
 import { UpdateConstructorDto } from './dto/update-constructor.dto';
 import { Constructor } from './entities/constructor.entity';
 import { ConstructorNotFoundException } from './exceptions/not-found.exception';
@@ -17,8 +18,8 @@ export class ConstructorsService {
     return this.constructorRepository.save(createConstructorDto);
   }
 
-  findAll() {
-    return this.constructorRepository.find();
+  findAll(query?: QueryConstructorDto) {
+    return this.constructorRepository.find(query);
   }
 
   async findOne(id: number) {

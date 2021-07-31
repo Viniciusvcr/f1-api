@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ParseIdPipe } from 'src/parse-id.pipe';
 import { ConstructorsService } from './constructors.service';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
+import { QueryConstructorDto } from './dto/query-constructor.dto';
 import { UpdateConstructorDto } from './dto/update-constructor.dto';
 
 @Controller('constructors')
@@ -22,8 +24,8 @@ export class ConstructorsController {
   }
 
   @Get()
-  findAll() {
-    return this.constructorsService.findAll();
+  findAll(@Query() query: QueryConstructorDto) {
+    return this.constructorsService.findAll(query);
   }
 
   @Get('active')
