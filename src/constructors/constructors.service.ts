@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PeopleService } from 'src/people/people.service';
 import { IsNull, Repository } from 'typeorm';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
 import { QueryConstructorDto } from './dto/query-constructor.dto';
@@ -12,6 +13,7 @@ export class ConstructorsService {
   constructor(
     @InjectRepository(Constructor)
     private readonly constructorRepository: Repository<Constructor>,
+    private readonly peopleService: PeopleService,
   ) {}
 
   create(createConstructorDto: CreateConstructorDto) {
@@ -23,13 +25,9 @@ export class ConstructorsService {
   }
 
   async findOne(id: number) {
-    const constructor = await this.constructorRepository.findOne(id);
-
-    if (!constructor) {
-      throw new ConstructorNotFoundException();
-    }
-
-    return constructor;
+    return this.constructorRepository.findOneOrFail(id, {
+      relations: ['teamMembers'],
+    });
   }
 
   async update(id: number, updateConstructorDto: UpdateConstructorDto) {
@@ -52,5 +50,13 @@ export class ConstructorsService {
     return this.constructorRepository.find({
       where: { championshipLeavingYear: IsNull() },
     });
+  }
+
+  findTeamMembers(id: number) {
+    return this.peopleService.findAll({ where: { id } });
+  }
+
+  async findTeamMember(id: number, personId: number) {
+    return this.peopleService.findOneTeamMember(id, personId);
   }
 }

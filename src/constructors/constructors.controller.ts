@@ -38,6 +38,19 @@ export class ConstructorsController {
     return this.constructorsService.findOne(id);
   }
 
+  @Get(':id/teamMembers')
+  findTeamMembers(@Param('id', ParseIdPipe) id: number) {
+    return this.constructorsService.findTeamMembers(id);
+  }
+
+  @Get(':id/teamMembers/:personId')
+  findTeamMember(
+    @Param('id', ParseIdPipe) id: number,
+    @Param('personId', ParseIdPipe) personId: number,
+  ) {
+    return this.constructorsService.findTeamMember(id, personId);
+  }
+
   @Patch(':id')
   update(
     @Param('id', ParseIdPipe) id: number,

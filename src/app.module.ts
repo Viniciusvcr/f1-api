@@ -1,26 +1,20 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_FILTER } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
+import ormconfig from '../ormconfig';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConstructorsModule } from './constructors/constructors.module';
-import { HttpExceptionFilter } from './http-exception.filter';
-import ormconfig from '../ormconfig';
+import { PeopleModule } from './people/people.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(ormconfig),
     ConstructorsModule,
+    PeopleModule,
   ],
   controllers: [AppController],
-  providers: [
-    { provide: APP_FILTER, useClass: HttpExceptionFilter },
-    AppService,
-  ],
+  providers: [AppService],
 })
-export class AppModule {
-  constructor(private dbConnection: Connection) {}
-}
+export class AppModule {}

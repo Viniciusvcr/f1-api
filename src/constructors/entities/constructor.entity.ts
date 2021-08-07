@@ -1,7 +1,9 @@
+import { Person } from 'src/people/entities/person.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -10,6 +12,9 @@ import {
 export class Constructor {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToMany(() => Person, (person) => person.team)
+  teamMembers: Person[];
 
   @Column()
   name: string;
