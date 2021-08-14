@@ -10,7 +10,7 @@ import {
 import { PeopleService } from './people.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
-import { ParseIdPipe } from 'src/parse-id.pipe';
+import { ParseIdPipe } from 'src/pipes/parse-id.pipe';
 
 @Controller('people')
 export class PeopleController {

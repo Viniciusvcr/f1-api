@@ -8,7 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ParseIdPipe } from 'src/parse-id.pipe';
+import { ParseIdPipe } from 'src/pipes/parse-id.pipe';
 import { ConstructorsService } from './constructors.service';
 import { CreateConstructorDto } from './dto/create-constructor.dto';
 import { QueryConstructorDto } from './dto/query-constructor.dto';
