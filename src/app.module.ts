@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConstructorsModule } from './constructors/constructors.module';
 import { PeopleModule } from './people/people.module';
+import { DriversModule } from './drivers/drivers.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { PeopleModule } from './people/people.module';
     TypeOrmModule.forRoot(ormconfig),
     ConstructorsModule,
     PeopleModule,
+    DriversModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -17,7 +17,7 @@ export class Person {
   @ManyToOne(() => Constructor, (constructor) => constructor.teamMembers, {
     nullable: true,
   })
-  team?: Constructor;
+  currentTeam?: Constructor;
 
   @Column()
   name: string;
