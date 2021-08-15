@@ -13,7 +13,7 @@ export class Constructor {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => Person, (person) => person.team)
+  @OneToMany(() => Person, (person) => person.currentTeam)
   teamMembers: Person[];
 
   @Column()
